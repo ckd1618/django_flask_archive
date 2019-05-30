@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Reg</title>
+
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;     
+            /* border: 1px solid pink;    */
+        }
+        .logout {
+            float: right;
+        }
+        .center {
+        
+            vertical-align: top;
+            display: block;
+            margin-left: 200px;
+        }
+        .column {
+            width: 600px;
+            display: inline-block;
+            /* text-align: center; */
+        }
+        .eachquote {
+            width: 500px;
+            border: 2px solid black;
+            float: left;
+            margin: 10px;
+        }
+        .black {
+            border: 1px solid black;
+        }
+        .column2 {
+            width: 600px;
+
+            float: right;
+
+        }
+        .buttonshadow{
+            box-shadow: 2px 2px;
+            padding:10px;
+            background-color: white;
+            float: right;
+        }
+        .buttonshadow2{
+            box-shadow: 2px 2px;
+            padding:10px;
+            background-color: white;
+            float:right;
+        }
+    </style>
+
+
+</head>
+<body>
+    <a class= 'buttonshadow' href="/logout">Logout</a>
+
+    <a class='logout' href="/myaccount">Edit My Account</a>
+    <h1>Welcome {{user.firstName}} {{user.lastName}}!</h1>
+    <h1 class='center'>Quotes</h1>
+    <div class = 'column'>
+        {% for i in allquotes reversed%}
+        <div class='eachquote'>
+            <p>{{i.author}}: "{{i.desc}}"</p>
+            <br>
+            <p>Posted By <a href="/user/{{i.user.id}}">{{i.user.firstName}} {{i.user.lastName}}</a></p>
+            <br>
+            <p>{{i.likestotal}} people like this</p>
+            <a class= 'buttonshadow2' href="/addlike/{{i.id}}">Like!</a>
+            {%if i.user_id == user.id%}
+            <a href="/cancel/{{i.id}}">Delete!</a>   
+            {%endif%} 
+        </div>
+ 
+        {%endfor%}
+    </div>
+
+    <div class = 'column2'>
+        <h1>Add a Quote!</h1>
+        <br>
+        <form action='/valquote' method='POST'>
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Author</td>
+                    <td><textarea class='black' name='author' rows="2" cols="30"></textarea></td>
+                </tr>
+                <br>
+                <tr>
+                    <td>Quote</td>
+                    <td><textarea class='black' name='quote' rows="5" cols="50"></textarea></td>
+                </tr>
+                <br>
+                <tr>
+                    <td></td>
+                    <td><button>Submit</button></td>
+                </tr>     
+
+            </table>
+        </form>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <div>
+
+    </div>
+
+
+</body>
+</html>
+
+    <!-- <a href="/quotes">Home</a> -->
+    <!-- <a href="javascript:history.go(-1)" class="btn btn-default">jsback</a> -->
+
+    <!-- <a class= 'logout' href="/dashboard">dashboard</a>
+    <a href="/logout">Logout</a>
+    <a href="/addjob">Add a Job</a>
+    <a href="/dashboard">Back</a>
+    <a href="/history">History</a>
+    <a href="javascript:history.go(-1)" class="btn btn-default">jsback</a>
+    <table class='input'>
+        <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Action</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+            
+        {%for i in info %}
+            
+        <tr>
+            <td>{{i.title}}</td>
+            <td>{{i.location}}</td>
+            <td><a href="/view/{{i.id}}">View</a></td>
+            <td><a href="/addtomyjobs/{{i.id}}">Add</a></td>
+            {% if i.user.id == user.id %}
+            <td><a href="/edit/{{i.id}}">Edit</a></td>
+            <td><a href="/cancel/{{i.id}}">Cancel</a></td>
+            {%endif%}
+        </tr>
+        {%endfor%}
+
+    </table>
+    <br>
+    <table class='input'>
+        
+        <tr>
+            <th>&emsp; My Jobs &emsp; ...</th>
+        </tr>
+        {%for j in myjobs %}
+        <tr>
+            <td>{{j.title}}</td>
+            <td><a href="/view/{{j.id}}">View</a></td>
+            <td><a href="/cancel/{{j.id}}">Done</a></td>
+        </tr>
+        {%endfor%}
+    </table> -->

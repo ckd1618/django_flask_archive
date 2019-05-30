@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Reg</title>
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;     
+            /* border: 1px solid pink;    */
+        }
+        .registerbox {
+            border: 2px solid black;
+            display: inline-block;
+        }
+        .loginbox {
+            border: 2px solid black;
+            display: inline-block
+        }
+        .masterdiv1 {
+            display: inline-block;
+            margin: 20px;
+        }
+        .masterdiv2 {
+            display: inline-block;
+            margin: 20px;
+            vertical-align: top;
+        }
+        .ib {
+            display: inline-block;
+        }
+        .input {
+            border: 1px solid black;
+
+        }
+    
+    </style>
+</head>
+<body>
+    <a class= 'logout' href="/dashboard">dashboard</a>
+    <a href="/logout">Logout</a>
+    <a href="/addjob">Add a Job</a>
+    <a href="/dashboard">Back</a>
+    <a href="/history">History</a>
+    <a href="javascript:history.go(-1)" class="btn btn-default">jsback</a>
+    <table class='input'>
+        <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Action</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+            
+        {%for i in info reversed %}
+            
+        <tr>
+            <td>{{i.title}}</td>
+            <td>{{i.location}}</td>
+            <td><a href="/view/{{i.id}}">View</a></td>
+            <td><a href="/addtomyjobs/{{i.id}}">Add</a></td>
+            {% if i.user.id == user.id %}
+            <td><a href="/edit/{{i.id}}">Edit</a></td>
+            <td><a href="/cancel/{{i.id}}">Cancel</a></td>
+            {%endif%}
+        </tr>
+        {%endfor%}
+
+    </table>
+    <br>
+    <table class='input'>
+        
+        <tr>
+            <th>&emsp; My Jobs &emsp; ...</th>
+        </tr>
+        {%for j in myjobs %}
+        <tr>
+            <td>{{j.title}}</td>
+            <td><a href="/view/{{j.id}}">View</a></td>
+            <td><a href="/cancel/{{j.id}}">Done</a></td>
+        </tr>
+        {%endfor%}
+    </table>
+
+
+    <!-- <form action="/message" method='POST'>
+        <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
+        <label for="textarea1">Message</label>
+<button class="waves-effect waves-light btn">Post</button>
+</form>
+{% for m in messages %}
+        <span class="card-title">{{m.user.first_name}} {{m.user.last_name}}</span>
+        <p>{{m.content|linebreaksbr}}</p>
+        <h6>{{m.created_at|date:'N d P'}}</h6>
+{% for c in m.messages_comments.all %}
+                <span class="card-title">{{c.user.first_name}} {{c.user.last_name}}</span>
+                <p>{{c.content|linebreaksbr}}</p>
+                <h6>{{c.created_at|date:'N d P'}}</h6>
+{% endfor %}
+<form action="/comment/{{m.id}}" method="POST">
+            <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
+            <label for="textarea1">Comment</label>
+    <button class="waves-effect waves-light btn">Comment</button>
+</form>
+{% endfor %} -->
+
+
+
+
+
+    <!-- {% if messages%}
+    <ul class = 'messages'>
+        {% for message in messages %}
+            </il{% if message.tags %} class={{message.tags}} {%endif%} {{message}}></li>
+        {%endfor%}
+    </ul>
+    {%endif%}
+
+    <h1>Welcome {{user.name}}!</h1>
+    <a href='/books/add'>Add Book and Review</a>
+    <a href='/logout'>Logout</a>
+
+    <div class='masterdiv1'>
+
+    </div>
+
+    <div class='masterdiv2'>
+
+    </div> -->
+
+
+
+</body>
+</html>

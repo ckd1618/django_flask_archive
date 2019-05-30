@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Reg</title>
+
+    <style>
+        .floatr {
+            float:right;
+            margin-right: 10px;
+        }
+        .gap {
+            height: 50px;
+        }
+        .border {
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+    <a class='floatr' href="/logout">Logout</a>
+    <a class='floatr' href="/addtrip">Add Trip </a>
+    <h1>Welcome {{user.firstName}}!</h1>
+    <h1>Your Trip Schedules</h1>
+
+    <table class='border'>
+        <tr>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+        {% for i in myplans reversed %}
+        <tr>
+            <td><a href="/view/{{i.id}}">{{i.destination}}</a></td>
+            <td>{{i.datefrom|date:"M d, Y"}}</td>
+            <td>{{i.dateto|date:"M d, Y"}}</td>
+            <td>{{i.desc}}</td>
+            <td><a href="/delete/{{i.id}}">Delete</a></td>
+        </tr>
+        {%endfor%}
+
+            <!-- <td><a href="/cancel/{{i.id}}">Cancel</a></td>
+            {% if i.user.id == presentuserid %}
+            <td>Delete</td>
+            {%endif%}
+        </tr> -->
+<!-- ------------------------ -->
+        {% for i in mytripsnoti reversed %}
+        <tr>
+            <td><a href="/view/{{i.id}}">{{i.destination}}</a></td>
+            <td>{{i.datefrom|date:"M d, Y"}}</td>
+            <td>{{i.dateto|date:"M d, Y"}}</td>
+            <td>{{i.desc}}</td>
+            <td><a href="/cancel/{{i.id}}">Cancel</a></td>
+
+        </tr>
+        {%endfor%}
+<!-- ------------------------ -->
+    </table>
+    <div class='gap'></div>
+    <h1>Other User's Travel Plans</h1>
+    <table class='border'>
+        <tr>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th><a>Do You Want To Join?</a></th>
+        </tr>
+        {% for i in alltripsexclude reversed %}
+
+            <tr>
+                <td><a href="/view/{{i.id}}">{{i.destination}}</a></td>
+                <td>{{i.datefrom|date:"M d, Y"}}</td>
+                <td>{{i.dateto|date:"M d, Y"}}</td>
+                <td><a href="/join/{{i.id}}">Join</a></td>
+            </tr>
+
+        {%endfor%}
+
+            <!-- <td><a href="/cancel/{{i.id}}">Cancel</a></td>
+            {% if i.user.id == presentuserid %}
+            <td>Delete</td>
+            {%endif%}
+        </tr> -->
+    
+    </table>
+
+
+    <!-- <div class='box'>
+            <br>
+        {{info.desc|linebreaksbr}}<br><br>
+        {{info.location|linebreaksbr}}<br><br>
+        {{info.user.firstName}} {{info.user.lastName}}<br><br>
+        {{info.createdAt|date:"M d, Y"}}<br><br>
+        {{info.id}}<br><br>
+    </div> -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+</body>
+</html>
+
+    <!-- <a href="/dashboard">Home</a> -->
+    <!-- <a href="javascript:history.go(-1)" class="btn btn-default">jsback</a> -->
+
+    <!-- <a class= 'logout' href="/dashboard">dashboard</a>
+    <a href="/logout">Logout</a>
+    <a href="/addjob">Add a Job</a>
+    <a href="/dashboard">Back</a>
+    <a href="/history">History</a>
+    <a href="javascript:history.go(-1)" class="btn btn-default">jsback</a>
+    <table class='input'>
+        <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Action</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+            
+        {%for i in info %}
+            
+        <tr>
+            <td>{{i.title}}</td>
+            <td>{{i.location}}</td>
+            <td><a href="/view/{{i.id}}">View</a></td>
+            <td><a href="/addtomyjobs/{{i.id}}">Add</a></td>
+            {% if i.user.id == user.id %}
+            <td><a href="/edit/{{i.id}}">Edit</a></td>
+            <td><a href="/cancel/{{i.id}}">Cancel</a></td>
+            {%endif%}
+        </tr>
+        {%endfor%}
+
+    </table>
+    <br>
+    <table class='input'>
+        
+        <tr>
+            <th>&emsp; My Jobs &emsp; ...</th>
+        </tr>
+        {%for j in myjobs %}
+        <tr>
+            <td>{{j.title}}</td>
+            <td><a href="/view/{{j.id}}">View</a></td>
+            <td><a href="/cancel/{{j.id}}">Done</a></td>
+        </tr>
+        {%endfor%}
+    </table> -->

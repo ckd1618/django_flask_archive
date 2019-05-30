@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .bb {
+            border: 1px solid black;
+        }
+        .logout {
+            float: right;
+            margin-right: 20px;
+        }
+        h1 {
+            display: inline-block
+        }
+        .bottom {
+            display: block;
+            height: 300px;
+            width: 400px;
+
+        }
+        .messages{
+            color:red;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <a href="javascript:history.go(-1)">jsback</a>
+    <a href="/history">History</a>
+    <a class='logout' href="/logout">Logout</a>
+    <a class= 'logout' href="/dashboard">Back</a>
+    <h1>Add a Job</h1>
+    <table>
+        <form action='/addjobsubmit' method='POST'>
+            {% csrf_token %}
+            <tr>
+                <td>Title</td>
+                <td><textarea name='title' rows="2" cols="50"></textarea></td>
+            </tr>
+
+            <tr>
+                <td>Description</td>
+                <td><textarea name='desc' rows="4" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td><textarea name='location' rows="2" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button>Submit</button></td>
+            </tr>
+            
+        </form>
+
+    </table>
+        <div class='bottom'>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

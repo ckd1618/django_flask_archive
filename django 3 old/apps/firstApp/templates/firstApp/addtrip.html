@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .buttonshadow{
+            box-shadow: 2px 2px;
+            padding:10px;
+            background-color: white;
+            float: right;
+            border: 1px solid black;
+        }
+        .back {
+            float:right;
+            margin-right: 10px;
+        }
+        .messages{
+            color:red;
+        }
+    </style>
+
+
+</head>
+<body>
+    <a class='back' href="/logout">Logout</a>
+
+    <a class='back' href="/travels">Back</a>
+    <div>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <h1>Add a Trip</h1>
+
+    <table class='border'>
+        <form action='/addjobr' method='POST'>
+            {% csrf_token %}
+            <tr>
+                <td>Destination</td>
+                <td><input type="text" name="destination"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><textarea name='desc' rows="2" cols="30"></textarea></td>
+            </tr>
+            <tr>
+                <td>Travel Date From</td>
+                <td><input type="date" name="datefrom"></td>
+            </tr>
+            <tr>
+                <td>Travel Date To</td>
+                <td><input type="date" name="dateto"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button>Submit</button></td>
+            </tr>
+            
+        </form>
+    
+    </table>
+
+</body>
+</html>

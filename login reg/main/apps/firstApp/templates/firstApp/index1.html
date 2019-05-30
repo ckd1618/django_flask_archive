@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Reg</title>
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;     
+            /* border: 1px solid pink;    */
+        }
+        .registerbox {
+            border: 2px solid black;
+            display: inline-block;
+        }
+        .loginbox {
+            border: 2px solid black;
+            display: inline-block
+        }
+        .masterdiv1 {
+            display: inline-block;
+            margin: 20px;
+        }
+        .masterdiv2 {
+            display: inline-block;
+            margin: 20px;
+            vertical-align: top;
+        }
+        .ib {
+            display: inline-block;
+        }
+        input {
+            border: 1px solid black;
+        }
+    
+    </style>
+</head>
+<body>
+    {% if messages%}
+    <ul class = 'messages'>
+        {% for message in messages %}
+            </il{% if message.tags %} class={{message.tags}} {%endif%} {{message}}></li>
+        {%endfor%}
+    </ul>
+    {%endif%}
+        <h1>Welcome!</h1>
+    <div class='masterdiv1'>
+        <h2>Register</h2>
+        <div class='registerbox'>
+            <form class='ib' action="/register" method="POST">
+                {% csrf_token %}
+                <p>Name: <input type="text" name="name"></p>
+                <p>Alias: <input type="text" name="alias"></p>
+                <p>Email: <input type="email" name="email"></p>
+                <p>Password: <input type="password" name="password"></p>
+                <p>*Password should be at least 8 characters</p>
+                <p>Confirm PW: <input type="password" name="confirm"></p>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+
+    <div class='masterdiv2'>
+        <h2>Login</h2>
+        <div class='loginbox'>
+            <form class='ib' action="/login" method="POST">
+                {% csrf_token %}
+                <p>Email: <input type="email" name="email"></p>
+                <p>Password: <input type="password" name="password"></p>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

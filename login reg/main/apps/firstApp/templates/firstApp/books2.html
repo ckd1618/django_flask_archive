@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Reg</title>
+    <style>
+        * {
+            margin: 0px;
+            border: 0px;     
+            /* border: 1px solid pink;    */
+        }
+        .registerbox {
+            border: 2px solid black;
+            display: inline-block;
+        }
+        .loginbox {
+            border: 2px solid black;
+            display: inline-block
+        }
+        .masterdiv1 {
+            display: inline-block;
+            margin: 20px;
+        }
+        .masterdiv2 {
+            display: inline-block;
+            margin: 20px;
+            vertical-align: top;
+        }
+        .ib {
+            display: inline-block;
+        }
+        input {
+            border: 1px solid black;
+        }
+    
+    </style>
+</head>
+<body>
+    {% if messages%}
+    <ul class = 'messages'>
+        {% for message in messages %}
+            </il{% if message.tags %} class={{message.tags}} {%endif%} {{message}}></li>
+        {%endfor%}
+    </ul>
+    {%endif%}
+
+    <h1>Welcome {{user.name}}!</h1>
+    <a href='/books/add'>Add Book and Review</a>
+    <a href='/logout'>Logout</a>
+
+    <div class='masterdiv1'>
+
+    </div>
+
+    <div class='masterdiv2'>
+
+    </div>
+
+
+
+</body>
+</html>

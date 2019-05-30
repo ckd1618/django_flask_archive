@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Reg</title>
+
+    <style>
+        .buttonshadow{
+            box-shadow: 2px 2px;
+            padding:10px;
+            background-color: white;
+            float: right;
+        }
+        .back {
+            float:right;
+        }
+    </style>
+
+
+</head>
+<body>
+    <a class= 'buttonshadow' href="/logout">Logout</a>
+
+    <a class='back' href="/quotes">Back</a>
+
+    <h1>Edit My Account</h1>
+    <table>
+        <form action='/x' method='POST'>
+            {% csrf_token %}
+            <tr>
+                <td>First Name</td>
+                <td><textarea name='firstName' rows="2" cols="50">{{info.firstName}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><textarea name='lastName' rows="4" cols="50">{{info.lastName}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><textarea name='email' rows="2" cols="50">{{info.email}}</textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button>Update</button></td>
+            </tr>
+            
+        </form>
+    
+    </table>
+    <!-- <a href="/quotes">Home</a> -->
+    <!-- <a href="javascript:history.go(-1)" class="btn btn-default">jsback</a> -->
+</body>
+</html>

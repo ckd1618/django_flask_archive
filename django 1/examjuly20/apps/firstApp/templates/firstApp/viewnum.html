@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .bb {
+            border: 1px solid black;
+        }
+        .logout {
+            float: right;
+            margin-right: 20px;
+        }
+        h1 {
+            display: inline-block;
+        }
+        .bottom {
+            display: block;
+            height: 300px;
+            width: 400px;
+
+        }
+        .messages{
+            color:red;
+        }
+        .box {
+            width: 500px;
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:history.go(-1)" class="btn btn-default">jsback</a>
+    <a href="/history">History</a>
+    <a class='logout' href="/logout">Logout</a>
+    <a class= 'logout' href="/dashboard">Back</a>
+    <h1 class='top right'>{{info.title}}</h1>
+
+
+    <div class='box'>
+            <br>
+        {{info.desc|linebreaksbr}}<br><br>
+        {{info.location|linebreaksbr}}<br><br>
+        {{info.user.firstName}} {{info.user.lastName}}<br><br>
+        {{info.createdAt|date:"M d, Y"}}<br><br>
+        {{info.id}}<br><br>
+    </div>
+
+</body>
+</html>

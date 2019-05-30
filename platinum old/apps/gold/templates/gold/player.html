@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Nina Platinum</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3>Welcome to {{user.first_name}}'s Player Profile</h3>
+                <a href="/logout">Logout</a> -- 
+                <a href="/dashboard">Back to Dashboard</a> -- 
+                {% if user.id == request.session.user_id %}
+                    <a href="/edit">Edit</a>
+                {% else %}
+                    <a href="/follow/{{user.id}}">Follow</a>
+                {% endif %}
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h1>{{user.first_name}}'s Score: {{user.gold}}</h1>
+                <h4>Followers: {{user.following.all.count}}</h4>
+                <table class="striped centered">
+                    <thead>
+                        <tr>
+                            <th>Result</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                        {% for a in activities %}
+                            <tr>
+                                <td>{{a.result}}</td>
+                                <td>{{a.message}}</td>
+                                <td>{{a.created_at}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

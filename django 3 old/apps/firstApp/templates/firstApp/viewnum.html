@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Reg</title>
+
+    <style>
+        .floatr {
+            float:right;
+            margin-right: 10px;
+        }
+        .gap {
+            height: 50px;
+        }
+    </style>
+
+</head>
+<body>
+    <a class='floatr' href="/logout">Logout</a>
+    <a class='floatr' href="/travels">Back</a>
+    <h1>{{chosentrip.destination}}</h1>
+    <p>Planned By: {{chosentrip.user.firstName}} {{chosentrip.user.lastName}}</p>
+    <p>Description: {{chosentrip.desc}}</p>
+    <p>Travel Date From: {{chosentrip.datefrom}}</p>
+    <p>Travel Date To: {{chosentrip.dateto}}</p>
+    <br>
+    <br>
+
+
+    <h1>Other Users Joining the Trip:</h1>
+    {%for i in alljoiners%}
+    <p>{{i.firstName}} {{i.lastName}}</p>
+    {%endfor%}
+
+</body>
+</html>

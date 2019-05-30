@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold</title>
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.1/dist/css/foundation.min.css" integrity="sha256-5B4hbMU9OJUxbUEvafv7D53WeubxzKZBqPfQNMh6Iw8= sha384-n7bC26QCtUZ5T9AHXtZrl7FcPQL5BkGi/JXbs6FVnUexlfniI0xH42VZxa4OxPD1 sha512-AnfTqiknRiK8BIwGSIegiguDX0838ShwXn8bEmTGPb31OPyYMzBbtnuekO6qSFzP/J8a0bMe4V6FcfM7n/YONQ=="
+        crossorigin="anonymous">
+    <style>
+        .show-activity{
+            height:300px;
+            overflow:scroll;
+            border:2px solid #1779ba;
+            padding:10px;
+        }
+        .success{
+            color:#3adb76;
+        }
+        .failure{
+            color:#cc4b37;
+        }
+    </style>
+    <!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.1/dist/js/foundation.min.js" integrity="sha256-wTcu2ZVTDMsVW8yIi4MAEPKsX04ZNW4Ahr0xZtFaBOA= sha384-jeQsPA9S1co5+XspMVKVhtst1k8mzjk63i2h2rtMEpZBOVE5i22Gdjj8IF7x8e1R sha512-th5Nh7lAgv9W5pWVbKvGpb5o0NUA/ozLF7f9uxboNqVyn5DG/azSVE8k0lKR2w7Ww648/Wnb4CsgPO4SZ7OdTw=="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell mall-12">
+                <h2>Your have {{gold}} gold.</h2>
+            </div>
+        </div>
+
+        <div class="grid-x">
+            <div class="cell small-12 medium-6 large-3">
+                <h3>Farm</h3>
+                <p>Earns 10-20 Gold</p>
+                <form action="/gold" method='POST'>
+                    <input type="hidden" name="building" value="farm">
+                    <button class="button hollow primary">Find Gold</button>
+                </form>
+            </div>
+            <div class="cell small-12 medium-6 large-3">
+                <h3>Cave</h3>
+                <p>Earns 5-10 Gold</p>
+                <form action="/gold" method='POST'>
+                    <input type="hidden" name="building" value="cave">
+                    <button class="button hollow success">Find Gold</button>
+                </form>
+            </div>
+            <div class="cell small-12 medium-6 large-3">
+                <h3>House</h3>
+                <p>Earns 2-5 Gold</p>
+                <form action="/gold" method='POST'>
+                    <input type="hidden" name="building" value="house">
+                    <button class="button hollow warning">Find Gold</button>
+                </form>
+            </div>
+            <div class="cell small-12 medium-6 large-3">
+                <h3>Casino</h3>
+                <p>Earns/Loses 0-50 Gold</p>
+                <form action="/gold" method='POST'>
+                    <input type="hidden" name="building" value="casino">
+                    <button class="button hollow alert">Find Gold</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid-x">
+            <div class="small-12">
+                <h3>Activity</h3>
+                <div class="show-activity">
+                    {% for i in activities|reverse %}
+                        <p class="{{i.type}}">{{i.message}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

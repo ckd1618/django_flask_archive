@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Nina Platinum</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3>Welcome {{user.first_name}} to Ninja Platinum Dashboard</h3>
+                <a href="/logout">Logout</a>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s8">
+                <h5>Play</h5>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Farm</span>
+                                <p>If you play here you could win between 10 and 20 pieces of gold.</p>
+                            </div>
+                            <div class="card-action">
+                                <form action="/gamble" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="game_type" value="farm">
+                                    <button class="btn light-blue">Play</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Cave</span>
+                                <p>If you play here you could win between 5 and 10 pieces of gold.</p>
+                            </div>
+                            <div class="card-action">
+                                <form action="/gamble" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="game_type" value="cave">
+                                    <button class="btn light-blue">Play</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">House</span>
+                                <p>If you play here you could win between 2 and 5 pieces of gold.</p>
+                            </div>
+                            <div class="card-action">
+                                <form action="/gamble" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="game_type" value="house">
+                                    <button class="btn light-blue">Play</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Casino</span>
+                                <p>If you play here you could win or lose between 0 and 50 pieces of gold.</p>
+                            </div>
+                            <div class="card-action">
+                                <form action="/gamble" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="game_type" value="casino">
+                                    <button class="btn light-blue">Play</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4">
+                <h5>Leaderboard</h5>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card orange darken-4">
+                            <div class="card-content white-text">
+                                <span class="card-title">Your Score</span>
+                                <p>{{user.gold}}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="/score/{{user.id}}">View Player Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <table class="striped centered">
+                            <thead>
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                                {% for p in all_players %}
+                                <tr>
+                                    <td><a href="/score/{{p.id}}">{{p.first_name}} {{p.last_name}}</a></td>
+                                    <td>{{p.gold}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <table class="striped centered">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Result</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+                
+                            <tbody>
+                                {% for a in activity %}
+                                <tr>
+                                    <td>{{a.user.first_name.0|upper}}{{a.user.last_name.0|upper}}</td>
+                                    <td>
+                                        {{a.result}}
+                                    </td>
+                                    <td>{{a.message}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
